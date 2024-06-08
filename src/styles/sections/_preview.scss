@@ -1,0 +1,14 @@
+@use '../config/' as *;
+
+.preview {
+  display: none;
+  position: relative;
+  img {
+    position: sticky;
+    top: 0;
+  }
+
+  @include media-lg {
+    display: block;
+  }
+}

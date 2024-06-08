@@ -1,0 +1,37 @@
+// Font family
+@font-face {
+  font-family: 'Karla';
+  src: url('./fonts/Karla-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 200 800;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('./fonts/Karla-Italic-VariableFont_wght.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 200 800;
+}
+
+$ff-primary: 'Karla', sans-serif;
+
+// Font sizes
+$fs-200: 0.75rem;
+$fs-300: 0.875rem;
+$fs-400: 1rem;
+$fs-500: 1.125rem;
+$fs-600: 1.5rem;
+$fs-700: 2rem;
+$fs-800: 3.5rem;
+
+// Font weight
+$fw-300: 300;
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+$fw-800: 800;
+
+// Line height
+$lh-400: 1.2;
+$lh-700: 1.5;

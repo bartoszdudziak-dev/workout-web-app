@@ -1,0 +1,95 @@
+@use '../config/' as *;
+
+.grid-results-preview {
+  position: relative;
+  @include section-padding();
+  @include grid-layout(1);
+  gap: 2rem;
+  @include media-lg {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.results__title {
+  @include section-title();
+  text-align: center;
+  margin-block-end: 2rem;
+}
+
+.results__list {
+  @include flex-layout(column);
+  gap: 1rem;
+}
+
+.exercise {
+  @include flex-layout(row, flex-start, center);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+  gap: 0.5rem;
+}
+
+.exercise-btn {
+  @include btnTransition(500ms);
+
+  @include media-hover {
+    &:hover {
+      @include btnHover();
+    }
+  }
+}
+
+.exercise__name {
+  font-size: $fs-300;
+  font-weight: $fw-600;
+  text-transform: uppercase;
+  text-align: center;
+  flex: 1;
+
+  @include media-sm {
+    font-size: $fs-400;
+  }
+
+  @include media-md {
+    font-size: $fs-500;
+  }
+}
+
+.exercise__category-img {
+  width: 3rem;
+
+  @include media-md {
+    width: 5rem;
+  }
+}
+
+.exercise__muscles {
+  display: none;
+
+  @include media-md {
+    @include flex-layout(column, center, stretch);
+    gap: 0.25rem;
+    margin-inline-start: auto;
+    max-width: 5rem;
+    width: 100%;
+
+    li {
+      padding: 0.15rem 0.3rem;
+      border-radius: 0.25rem;
+      background-color: rgba($color: $clr-primary-300, $alpha: 1);
+
+      &:first-child {
+        background-color: rgba($color: $clr-primary-400, $alpha: 0.75);
+      }
+    }
+  }
+}
+
+.exercise__muscle,
+.exercise__category {
+  font-size: $fs-200;
+  font-weight: $fw-500;
+  color: $clr-neutral-200;
+  text-transform: capitalize;
+}

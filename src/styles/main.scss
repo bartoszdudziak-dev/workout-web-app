@@ -1,0 +1,17 @@
+@use './config/' as *;
+@use './sections/' as *;
+
+body {
+  background-color: $clr-neutral-200;
+  font-family: $ff-primary;
+  font-size: $fs-400;
+  font-weight: $fw-400;
+  line-height: $lh-700;
+  color: $clr-neutral-700;
+  position: relative;
+}
+
+.wrapper {
+  width: min(90%, $bp-xl);
+  margin-inline: auto;
+}
