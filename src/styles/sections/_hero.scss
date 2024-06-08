@@ -1,0 +1,17 @@
+@use '../config/' as *;
+@use './search' as *;
+@use './categories' as *;
+
+.hero > .wrapper {
+  @include section-padding();
+  @include flex-layout(column, space-between);
+  gap: 4rem;
+
+  @include media-lg {
+    flex-direction: row;
+
+    & > * {
+      width: 50%;
+    }
+  }
+}

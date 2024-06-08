@@ -1,0 +1,38 @@
+@use './colors' as *;
+@use './fonts' as *;
+@use './colors' as *;
+@use './layout' as *;
+@use './media' as *;
+
+@mixin section-title {
+  font-size: $fs-600;
+  font-weight: $fw-600;
+  line-height: $lh-400;
+  text-transform: uppercase;
+
+  @include media-md {
+    font-size: $fs-700;
+  }
+}
+
+@mixin section-padding {
+  padding-block: 3rem;
+
+  @include media-md {
+    padding-block: 3.5rem;
+  }
+
+  @include media-lg {
+    padding-block: 4rem;
+  }
+}
+
+@mixin btnTransition($duration: 300ms) {
+  transition: transform $duration ease-out, background-color $duration ease-out;
+}
+
+@mixin btnHover {
+  background-color: rgba($color: $clr-neutral-400, $alpha: 0.75);
+  outline: 2px solid $clr-primary-300;
+  transform: scale(1.05);
+}

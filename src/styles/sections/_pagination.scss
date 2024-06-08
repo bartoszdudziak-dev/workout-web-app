@@ -1,0 +1,39 @@
+@use '../config/' as *;
+
+.pagination {
+  @include flex-layout(row, flex-start, center);
+  position: relative;
+  margin-block-start: 1rem;
+  margin-inline: auto;
+  width: 80%;
+}
+
+.pagination__current-page {
+  @include flex-layout(row, center, center);
+  gap: 0.25rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: $fs-500;
+  font-weight: $fw-500;
+}
+
+.pagination__btn {
+  img {
+    width: 2rem;
+
+    @include media-lg {
+      width: 3rem;
+    }
+  }
+}
+
+#previousPageBtn {
+  margin-inline-end: auto;
+}
+
+#nextPageBtn {
+  margin-inline-start: auto;
+}

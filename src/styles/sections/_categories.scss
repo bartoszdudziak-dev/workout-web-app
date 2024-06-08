@@ -1,0 +1,58 @@
+@use '../config/' as *;
+
+.categories {
+  @include flex-layout(column, center, center);
+  gap: 2rem;
+}
+
+.categories__title {
+  @include section-title();
+}
+
+.categories__grid {
+  @include grid-layout(2);
+  gap: 1rem;
+
+  @include media-sm {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-md {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @include media-lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-xxl {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.category {
+  @include flex-layout(column, center, center);
+  @include btnTransition();
+  gap: 0.5rem;
+  background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  aspect-ratio: 1;
+
+  @include media-hover {
+    &:hover {
+      @include btnHover();
+    }
+  }
+}
+
+.category__name {
+  font-size: $fs-500;
+  font-weight: $fw-700;
+  text-transform: uppercase;
+}
+
+.category__img {
+  max-width: 50%;
+  aspect-ratio: 1;
+}
