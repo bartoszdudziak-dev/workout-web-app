@@ -1,0 +1,11 @@
+@use '../config/' as *;
+
+.footer {
+  @include flex-layout(row, center, center);
+  background-color: $clr-neutral-700;
+  font-size: $fs-500;
+  font-weight: $fw-500;
+  color: $clr-neutral-200;
+  width: 100%;
+  padding-block: 1rem;
+}

@@ -16,14 +16,14 @@
 }
 
 @mixin section-padding {
-  padding-block: 3rem;
+  padding-block: 2rem;
 
   @include media-md {
-    padding-block: 3.5rem;
+    padding-block: 2.5rem;
   }
 
   @include media-lg {
-    padding-block: 4rem;
+    padding-block: 3rem;
   }
 }
 

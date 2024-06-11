@@ -1,7 +1,7 @@
 @use '../config/' as *;
 
 .categories {
-  @include flex-layout(column, center, center);
+  @include flex-layout(column, flex-start, center);
   gap: 2rem;
 }
 
