@@ -1,14 +1,67 @@
 @use '../config/' as *;
 
 .preview {
-  display: none;
-  position: relative;
-  img {
-    position: sticky;
-    top: 0;
+  gap: 2rem;
+  padding: 3rem 2rem 2rem 2rem;
+  margin: auto;
+  max-width: 100vw;
+  width: 100%;
+  overflow: hidden;
+
+  @include media-sm {
+    width: fit-content;
+    border-radius: 0.5rem;
   }
 
-  @include media-lg {
-    display: block;
+  @include media-md {
+    box-shadow: 0 0 20px rgba($color: $clr-primary-400, $alpha: 0.25);
   }
+
+  &[open] {
+    @include flex-layout(column, flex-start, center);
+  }
+
+  &::backdrop {
+    background-color: rgba($color: #000000, $alpha: 0.75);
+  }
+}
+
+.preview__img {
+  width: min(70%, 15rem);
+}
+
+.preview__title {
+  font-size: $fs-500;
+  font-weight: $fw-700;
+  line-height: $lh-400;
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 35ch;
+
+  @include media-md {
+    font-size: $fs-600;
+  }
+}
+
+.preview__instructions {
+  @include flex-layout(column);
+  gap: 0.75rem;
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.preview__instruction {
+  font-size: $fs-300;
+  line-height: $lh-400;
+
+  @include media-md {
+    font-size: $fs-400;
+  }
+}
+
+.preview__btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  max-width: 2.5rem;
 }

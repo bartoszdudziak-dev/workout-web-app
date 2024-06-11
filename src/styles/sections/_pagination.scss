@@ -5,7 +5,15 @@
   position: relative;
   margin-block-start: 1rem;
   margin-inline: auto;
-  width: 80%;
+  width: 50%;
+
+  @include media-md {
+    margin-block-start: 1rem;
+  }
+
+  @include media-lg {
+    width: 30%;
+  }
 }
 
 .pagination__current-page {
@@ -16,8 +24,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: $fs-500;
+  font-size: $fs-400;
   font-weight: $fw-500;
+
+  @include media-lg {
+    font-size: $fs-500;
+  }
 }
 
 .pagination__btn {
@@ -25,7 +37,7 @@
     width: 2rem;
 
     @include media-lg {
-      width: 3rem;
+      width: 2rem;
     }
   }
 }

@@ -73,6 +73,33 @@
                   <img src="../static/search.svg" alt="" />
                 </button>
               </form>
+              <div class="slider">
+                <img
+                  class="slider__img"
+                  src="../static/slider_image_1.jpg"
+                  alt=""
+                />
+                <img
+                  class="slider__img"
+                  src="../static/slider_image_2.jpg"
+                  alt=""
+                />
+                <img
+                  class="slider__img"
+                  src="../static/slider_image_3.jpg"
+                  alt=""
+                />
+                <img
+                  class="slider__img"
+                  src="../static/slider_image_4.jpg"
+                  alt=""
+                />
+                <img
+                  class="slider__img"
+                  src="../static/slider_image_5.jpg"
+                  alt=""
+                />
+              </div>
             </div>
             <div class="categories">
               <h2 class="categories__title">Choose Category</h2>
@@ -145,17 +172,29 @@
             </div>
           </div>
         </section>
-        <div class="grid-results-preview wrapper">
-          <section class="results">
-            <h3 class="results__title">Search Results</h3>
-            <ul class="results__list"></ul>
-            <div class="pagination"></div>
-          </section>
-          <section class="preview">
-            <img src="../static/chest.png" alt="" />
-          </section>
-        </div>
+        <section class="results wrapper hidden">
+          <h3 class="results__title">Search Results</h3>
+          <ul class="results__list"></ul>
+          <div class="pagination"></div>
+        </section>
+        <dialog class="preview">
+          <!-- <h3 class="preview__title">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi,
+            adipisci.
+          </h3>
+          <img src="../static/cardio.png" alt="" class="preview__img" />
+          <ul class="preview__instructions">
+            <li class="preview__instruction">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+              molestias iure nulla.
+            </li>
+          </ul>
+          <button class="preview__btn" id="btnClosePreview">
+            <img src="../static/close.svg" alt="" />
+          </button> -->
+        </dialog>
       </main>
+      <footer class="footer"><p>This is footer</p></footer>
     </div>
   </body>
 </html>

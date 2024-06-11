@@ -9,4 +9,13 @@ export const FETCH_OPTIONS = {
   },
 };
 export const MIN_INPUT_LENGTH = 3;
-export const RESULTS_PER_PAGE = 5;
+export const RESULTS_PER_PAGE = 10;
+export const MAX_MUSCLES_LENGTH = 3;
+export const SCROLL_TIMEOUT = 100;
+
+export const AJAX = function (queryType, query) {
+  return fetch(
+    `${API_URL}${queryType}/${query}?limit=00&offset=0`,
+    FETCH_OPTIONS
+  );
+};
