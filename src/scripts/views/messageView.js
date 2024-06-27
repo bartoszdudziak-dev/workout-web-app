@@ -6,7 +6,7 @@ class MessageView {
 
   displaySuccessMessage(message) {
     this.#displayMessage(message);
-    this.#messageEl.classList.remove('error');
+    this.#messageEl.classList.remove('warning');
     this.#messageEl.classList.add('success');
   }
 
