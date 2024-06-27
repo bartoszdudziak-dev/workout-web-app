@@ -66,6 +66,8 @@ const controlSearchResultsByCategory = async function () {
     // Render pagination
     paginationView.render(model.state.search);
 
+    // Scroll to results
+    resultsView.scrollToView();
     // Hide bookmark and schedule section if opened
     bookmarksView.close();
     scheduleView.close();
@@ -80,8 +82,6 @@ const controlPagination = function (goToPage) {
 
   // Render new pagination
   paginationView.render(model.state.search);
-
-  resultsView.scrollToView();
 };
 
 const controlPreview = async function () {
