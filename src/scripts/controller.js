@@ -11,6 +11,7 @@ import bookmarksView from './views/bookmarksView';
 import scheduleView from './views/scheduleView';
 import shareView from './views/shareView';
 import generateScheduleView from './views/generateScheduleView';
+import messageView from './views/messageView';
 
 const controlSearchResultsByName = async function () {
   try {
@@ -20,9 +21,9 @@ const controlSearchResultsByName = async function () {
     if (!query) return;
 
     // Remove hidden class, scroll to results, render loading
-    resultsView.scrollToView();
     resultsView.displaySection();
     resultsView.loading();
+    resultsView.scrollToView();
 
     // Load search results
     await model.loadSearchResults(queryType, query);
@@ -52,8 +53,8 @@ const controlSearchResultsByCategory = async function () {
     if (!query) return;
 
     // Remove hidden class, scroll to results, render loading
-    resultsView.loading();
     resultsView.displaySection();
+    resultsView.loading();
     resultsView.scrollToView();
 
     // Load search results
@@ -206,6 +207,7 @@ const controlClearSchedule = function () {
 const controlOpenShareModal = function () {
   const schedule = model.state.schedule;
   if (!schedule || (Array.isArray(schedule) && schedule.length === 0)) {
+    messageView.displayErrorMessage('There is nothing to share!');
     return;
   }
 
@@ -215,8 +217,13 @@ const controlOpenShareModal = function () {
 
 const controlShare = async function () {
   try {
+    shareView.startLoading();
     await shareView.sendSchedule(model.state.schedule);
+    shareView.stopLoading();
+    messageView.displaySuccessMessage('Sending successful!');
   } catch (error) {
+    shareView.stopLoading();
+    messageView.displayErrorMessage('Sending failed!');
     console.error(error);
   }
 };
@@ -246,10 +253,13 @@ const controlGenerateSchedule = async function () {
     // Close generate container
     generateScheduleView.stopLoading();
     generateScheduleView.close();
+    messageView.displaySuccessMessage('Schedule generated!');
 
     // Open schedule view
     scheduleView.open();
   } catch (error) {
+    generateScheduleView.stopLoading();
+    messageView.displayErrorMessage('Something went wrong!');
     console.error(error);
   }
 };

@@ -19,8 +19,6 @@ export const loadSearchResults = async function (queryType, query) {
     state.search.queryType = queryType;
     state.search.query = query;
 
-    console.log(queryType, query);
-
     const response = await AJAX(queryType, query);
 
     if (!response.ok) throw new Error('Request Error');

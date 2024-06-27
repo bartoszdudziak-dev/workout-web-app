@@ -1,6 +1,7 @@
 @use '../config/' as *;
 
 .share {
+  position: relative;
   @include media-sm {
     width: min(75%, $bp-sm);
   }
