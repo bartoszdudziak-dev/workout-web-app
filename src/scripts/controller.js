@@ -68,6 +68,7 @@ const controlSearchResultsByCategory = async function () {
 
     // Scroll to results
     resultsView.scrollToView();
+
     // Hide bookmark and schedule section if opened
     bookmarksView.close();
     scheduleView.close();
