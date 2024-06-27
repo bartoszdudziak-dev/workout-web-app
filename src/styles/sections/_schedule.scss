@@ -1,0 +1,120 @@
+@use '../config/' as *;
+
+.schedule {
+  @include flex-layout(column);
+  gap: 0.25rem;
+
+  position: fixed;
+  top: 20%; // as default
+  width: 100%;
+
+  overflow: hidden;
+  background-color: $clr-neutral-400;
+  padding: 0.75rem 1rem 1.75rem 1rem;
+  box-shadow: 0 5px 25px rgba($color: $clr-neutral-700, $alpha: 0.25);
+  transition: left 300ms ease-out, opacity 300ms ease-out;
+
+  @include media-sm {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    width: min(80%, 600px);
+  }
+}
+
+.schedule[data-open='true'] {
+  left: 0%;
+  opacity: 1;
+}
+
+.schedule[data-open='false'] {
+  left: -100%;
+  opacity: 0;
+}
+
+.schedule__title {
+  font-size: $fs-400;
+  font-weight: $fw-600;
+  text-transform: uppercase;
+
+  > span {
+    position: relative;
+  }
+
+  .schedule-notification {
+    @include media-sm {
+      width: 1.3rem;
+      font-size: $fs-300;
+    }
+  }
+
+  @include media-sm {
+    font-size: $fs-600;
+  }
+}
+
+.schedule__item {
+  @include flex-layout(row, flex-start, center);
+  gap: 1rem;
+
+  @include media-sm {
+    gap: 2rem;
+  }
+}
+
+.schedule__exercise {
+  font-size: $fs-300;
+  text-transform: capitalize;
+  font-weight: $fw-500;
+  background-color: $clr-neutral-200;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 200ms ease-out;
+  flex: 1;
+
+  @include media-sm {
+    font-size: $fs-400;
+  }
+
+  @include media-hover {
+    &:hover {
+      background-color: rgba($color: $clr-primary-300, $alpha: 0.25);
+    }
+  }
+}
+
+.schedule__control {
+  @include flex-layout(row, flex-end, center);
+  gap: 1rem;
+
+  button {
+    max-width: 2rem;
+  }
+}
+
+.schedule__delete-btn {
+  max-width: 1.75rem;
+  aspect-ratio: 1;
+  background-color: $clr-primary-400;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+
+  @include media-sm {
+    max-width: 2rem;
+  }
+
+  @include media-hover {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.schedule__list {
+  @include grid-layout();
+  margin-block-start: 0.5rem;
+  gap: 0.75rem;
+  max-height: 50dvh;
+  overflow-y: auto;
+}

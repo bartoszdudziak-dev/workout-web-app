@@ -8,6 +8,7 @@ class Slider {
     this._goToImage(0);
   }
 
+  // Initialization
   init() {
     setInterval(() => {
       if (this.currentImage === this.maxImage - 1) this.currentImage = 0;
@@ -20,13 +21,6 @@ class Slider {
     this.images.forEach((img, i) => {
       img.style.transform = `translateX(${100 * (i - imgToDisplay)}%)`;
     });
-  }
-
-  test() {
-    console.log(this.slider);
-    console.log(this.images);
-    console.log(this.currentImage);
-    console.log(this.maxImage);
   }
 }
 

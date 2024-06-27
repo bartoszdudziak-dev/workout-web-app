@@ -1,11 +1,15 @@
 @use '../config/' as *;
 
 .footer {
-  @include flex-layout(row, center, center);
+  @include flex-layout(row, flex-end);
   background-color: $clr-neutral-700;
-  font-size: $fs-500;
+  font-size: $fs-100;
   font-weight: $fw-500;
-  color: $clr-neutral-200;
+  color: rgba($color: $clr-neutral-200, $alpha: 0.3);
   width: 100%;
-  padding-block: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.footer__info {
+  @include flex-layout(column, flex-start, flex-end);
 }

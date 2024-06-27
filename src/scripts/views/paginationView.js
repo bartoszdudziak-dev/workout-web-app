@@ -1,12 +1,12 @@
 import View from './View';
 
 class PaginationView extends View {
-  _parentElement = document.querySelector('.pagination');
+  _parentEl = document.querySelector('.pagination');
   curPage;
   numPages;
 
   addHandlerClick(handler) {
-    this._parentElement.addEventListener('click', function (e) {
+    this._parentEl.addEventListener('click', function (e) {
       const btn = e.target.closest('.pagination__btn');
       if (!btn) return;
 
@@ -65,7 +65,7 @@ class PaginationView extends View {
 
   _generateNextButton() {
     return `
-    <button class="pagination__btn" id="nextPageBtn" data-goto="${
+    <button class="pagination__btn btn" id="nextPageBtn" data-goto="${
       this.curPage + 1
     }" aria-label="Next page">
       <img src="/next.svg" alt="" />
@@ -76,7 +76,7 @@ class PaginationView extends View {
   _generatePreviousButton() {
     return `
     <button
-      class="pagination__btn" id="previousPageBtn" data-goto="${
+      class="pagination__btn btn" id="previousPageBtn" data-goto="${
         this.curPage - 1
       }" aria-label="Previous page"> 
       <img src="/previous.svg" alt="" />

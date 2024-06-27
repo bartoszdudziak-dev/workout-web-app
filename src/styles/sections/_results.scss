@@ -2,14 +2,16 @@
 
 .results.wrapper {
   @include section-padding;
-  width: min(95%, $bp-xl);
+  padding-block-start: 3.5rem;
+
+  width: min(85%, $bp-md);
   position: relative;
 }
 
 .results__title {
   @include section-title();
   text-align: center;
-  margin-block-end: 0.5rem;
+  margin-block-end: 1rem;
 
   @include media-lg {
     margin-block-end: 1.5rem;
@@ -19,47 +21,47 @@
 .results__list {
   @include grid-layout(1);
   gap: 0.5rem;
+  grid-template-rows: repeat(8, 1fr);
+}
 
-  @include media-lg {
-    @include grid-layout(2);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 1rem;
+.results__item {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+
+  @include btnTransition(500ms);
+  @include media-hover {
+    &:hover {
+      @include btnHover();
+      border-radius: 0.5rem;
+    }
   }
 }
 
 .exercise {
   @include flex-layout(row, flex-start, center);
-  gap: 0.5rem;
+  gap: 0.75rem;
   position: relative;
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+  padding: 0.25rem;
 
   @include media-md {
     gap: 1rem;
   }
-}
 
-.exercise-btn {
-  @include btnTransition(500ms);
-
-  @include media-hover {
-    &:hover {
-      @include btnHover();
-    }
+  @include media-lg {
+    gap: 2rem;
   }
 }
 
 .exercise__name {
-  font-size: $fs-300;
+  font-size: $fs-200;
   font-weight: $fw-700;
   text-transform: capitalize;
   text-align: left;
   line-height: $lh-400;
 
   @include media-lg {
-    font-size: $fs-400;
+    font-size: $fs-300;
   }
 }
 
@@ -67,7 +69,7 @@
   width: 2rem;
 
   @include media-md {
-    width: 3rem;
+    width: 2.5rem;
   }
 }
 
@@ -78,8 +80,8 @@
     @include flex-layout(row);
     gap: 0.25rem;
     position: absolute;
-    top: 0.1rem;
-    right: 0.1rem;
+    top: 0.25rem;
+    right: 0.5rem;
   }
 }
 

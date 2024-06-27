@@ -1,12 +1,9 @@
 const header = document.querySelector('.header');
 const main = document.querySelector('main');
 
-export const adjustMainPadding = function () {
-  const headerHeight = getHeaderHeight();
-  main.style.paddingBlockStart = headerHeight + 'px';
-};
+// Adjust layout to fixed header works properly
+export const adjustMainPadding = () =>
+  (main.style.paddingBlockStart = getHeaderHeight() + 'px');
 
-export const getHeaderHeight = function () {
-  const headerHeight = header.getBoundingClientRect().height;
-  return headerHeight;
-};
+// Returns current header height
+export const getHeaderHeight = () => header.getBoundingClientRect().height;

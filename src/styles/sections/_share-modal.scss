@@ -1,0 +1,75 @@
+@use '../config/' as *;
+
+.share {
+  @include media-sm {
+    width: min(75%, $bp-sm);
+  }
+}
+
+.share__close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  max-width: 2.5rem;
+}
+
+.share__form {
+  @include flex-layout(column);
+  gap: 2.5rem;
+  > * {
+    flex: 1;
+  }
+}
+
+.share__submit-btn {
+  @include flex-layout(row, center, center);
+  gap: 1rem;
+  font-size: $fs-500;
+  font-weight: $fw-500;
+
+  background: rgba($color: $clr-primary-300, $alpha: 0.25);
+  transition: background 300ms ease-out, color 300ms ease-out;
+
+  text-transform: uppercase;
+  letter-spacing: 1.2;
+
+  border-radius: 0.25rem;
+  padding-block: 0.25rem;
+
+  img {
+    max-width: 1.5rem;
+    transition: transform 300ms ease-out;
+  }
+
+  @include media-hover {
+    &:hover {
+      background: $clr-primary-300;
+      color: $clr-neutral-200;
+
+      img {
+        transform: translateX(20%);
+      }
+    }
+  }
+}
+
+.share__input-control {
+  @include flex-layout(column);
+  gap: 0.5rem;
+  position: relative;
+}
+
+.share__input {
+  font-size: $fs-400;
+  font-weight: $fw-500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.share__error {
+  position: absolute;
+  bottom: -1.75rem;
+  font-size: $fs-300;
+  font-weight: $fw-600;
+  color: $clr-primary-400;
+}
