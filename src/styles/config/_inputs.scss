@@ -1,0 +1,89 @@
+@use './colors' as *;
+@use './media' as *;
+@use './fonts' as *;
+
+input {
+  cursor: pointer;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='email'] {
+  background-color: #ffffff;
+  border: 1px solid $clr-neutral-700;
+  transition: background-color 300ms ease-out;
+
+  &:focus-visible {
+    border-color: transparent;
+    outline: 2px solid $clr-neutral-700;
+    box-shadow: 0 0 25px rgba($color: $clr-primary-300, $alpha: 0.5);
+  }
+
+  &::placeholder {
+    color: rgba($color: $clr-neutral-700, $alpha: 0.3);
+  }
+
+  @include media-hover {
+    &:hover {
+      background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+    }
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Webkit browsers (Chrome, Safari) */
+}
+
+label {
+  width: min-content;
+  font-size: $fs-300;
+  font-weight: $fw-500;
+  text-transform: uppercase;
+  letter-spacing: 1.8;
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: transparent;
+  /* Not removed via appearance */
+  margin: 0;
+
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid $clr-neutral-700;
+  border-radius: 0.15rem;
+  display: grid;
+  place-content: center;
+  transition: background-color 300ms ease-out;
+
+  &:checked {
+    &::before {
+      content: '';
+      width: inherit;
+      height: inherit;
+      border-radius: inherit;
+      background-color: $clr-primary-300;
+      background-image: url('../../static/check.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  &:focus-visible {
+    outline: 1px auto -webkit-focus-ring-color;
+    outline-offset: 1px;
+  }
+
+  @include media-hover {
+    &:hover {
+      background-color: rgba($color: $clr-neutral-400, $alpha: 0.25);
+    }
+  }
+}

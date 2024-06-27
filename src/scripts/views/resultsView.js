@@ -1,10 +1,10 @@
 import View from './View';
 import { MAX_MUSCLES_LENGTH } from '../config';
 import { getHeaderHeight } from '../features/layout';
-import { SCROLL_TIMEOUT } from '../config';
+import { SCROLL_DELAY } from '../config';
 
 class ResultsView extends View {
-  _parentElement = document.querySelector('.results__list');
+  _parentEl = document.querySelector('.results__list');
 
   _generateMarkup() {
     return this._data
@@ -14,8 +14,8 @@ class ResultsView extends View {
 
   _generateSingleElement(exercise) {
     return `
-      <li>
-        <a class="exercise exercise-btn" href="#${exercise.id}">
+      <li class="results__item">
+        <a class="exercise" href="#${exercise.id}">
           <img
             class="exercise__category-img"
             src="/${exercise.category.replace(' ', '')}.png"
@@ -45,8 +45,7 @@ class ResultsView extends View {
   }
 
   scrollToView() {
-    const sectionY =
-      this._parentElement.parentElement.getBoundingClientRect().top;
+    const sectionY = this._parentEl.parentElement.getBoundingClientRect().top;
     const offset = getHeaderHeight();
 
     setTimeout(() => {
@@ -54,11 +53,11 @@ class ResultsView extends View {
         top: sectionY + window.scrollY - offset,
         behavior: 'smooth',
       });
-    }, SCROLL_TIMEOUT);
+    }, SCROLL_DELAY);
   }
 
   displaySection() {
-    this._parentElement.parentElement.classList.remove('hidden');
+    this._parentEl.parentElement.classList.remove('hidden');
   }
 }
 

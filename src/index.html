@@ -12,6 +12,8 @@
     <script src="./scripts/controller.js" type="module"></script>
   </head>
   <body>
+    <div class="overlay hidden"></div>
+    <div class="message hidden"></div>
     <div class="site">
       <header class="header">
         <div class="wrapper">
@@ -44,11 +46,28 @@
                 <li class="nav__item">
                   <a class="nav__link" href="#">Home</a>
                 </li>
-                <li class="nav__item">
-                  <a class="nav__link" href="#">Categories</a>
+                <li class="nav__item nav__item-bookmarks">
+                  <a
+                    class="nav__link"
+                    aria-label="Open bookmarks"
+                    id="bookmarks"
+                    href="#"
+                    >Bookmarks</a
+                  >
+                  <span class="bookmarks-notification hidden"></span>
+                </li>
+                <li class="nav__item nav__item-schedule">
+                  <a
+                    class="nav__link"
+                    id="schedule"
+                    aria-label="Open schedule"
+                    href="#"
+                    >Schedule</a
+                  >
+                  <span class="schedule-notification hidden"></span>
                 </li>
                 <li class="nav__item">
-                  <a class="nav__link" href="#">About</a>
+                  <a class="nav__link" id="about" href="#">About</a>
                 </li>
               </ul>
             </div>
@@ -172,29 +191,333 @@
             </div>
           </div>
         </section>
+
         <section class="results wrapper hidden">
           <h3 class="results__title">Search Results</h3>
           <ul class="results__list"></ul>
           <div class="pagination"></div>
         </section>
-        <dialog class="preview">
-          <!-- <h3 class="preview__title">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi,
-            adipisci.
-          </h3>
-          <img src="../static/cardio.png" alt="" class="preview__img" />
-          <ul class="preview__instructions">
-            <li class="preview__instruction">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-              molestias iure nulla.
-            </li>
-          </ul>
-          <button class="preview__btn" id="btnClosePreview">
+
+        <dialog class="modal preview"></dialog>
+
+        <section class="bookmarks" data-open="false">
+          <div class="bookmarks__control">
+            <button
+              class="bookmarks__clear-btn btn"
+              id="btnClearBookmarks"
+              aria-label="Clear bookmarks"
+            >
+              <img src="../static/clear.svg" alt="" />
+            </button>
+            <button
+              class="bookmarks__close-btn btn"
+              id="btnCloseBookmarks"
+              aria-label="Close bookmarks"
+            >
+              <img src="../static/close.svg" alt="" />
+            </button>
+          </div>
+          <span class="bookmarks__title">
+            <span
+              >Bookmarks<span class="bookmarks-notification hidden"></span
+            ></span>
+          </span>
+          <ul class="bookmarks__list"></ul>
+        </section>
+
+        <section class="schedule" data-open="false">
+          <div class="schedule__control">
+            <button
+              class="schedule__generate-btn btn"
+              id="btnOpenGenerate"
+              aria-label="Generate schedule"
+            >
+              <img src="../static/generate.svg" alt="" />
+            </button>
+            <button
+              class="schedule__share-btn btn"
+              id="btnShareSchedule"
+              aria-label="Share schedule"
+            >
+              <img src="../static/share.svg" alt="" />
+            </button>
+
+            <button
+              class="schedule__clear-btn btn"
+              id="btnClearSchedule"
+              aria-label="Clear schedule"
+            >
+              <img src="../static/clear.svg" alt="" />
+            </button>
+            <button
+              class="schedule__close-btn btn"
+              id="btnCloseSchedule"
+              aria-label="Close schedule"
+            >
+              <img src="../static/close.svg" alt="" />
+            </button>
+          </div>
+          <span class="schedule__title">
+            <span
+              >Schedule<span class="schedule-notification hidden"></span
+            ></span>
+          </span>
+          <ul class="schedule__list"></ul>
+        </section>
+
+        <dialog class="modal share" formmethod="dialog">
+          <button
+            class="modal__close-btn btn"
+            id="btnCloseShare"
+            aria-label="Close share contanier"
+          >
             <img src="../static/close.svg" alt="" />
-          </button> -->
+          </button>
+          <form class="share__form" novalidate>
+            <div class="share__input-control">
+              <label for="email" class="share__label">Email</label>
+              <input
+                class="share__input"
+                id="email"
+                type="email"
+                name="email"
+                placeholder="example@gmail.com"
+                autocomplete="email"
+              />
+              <span class="share__error hidden">Invalid email</span>
+            </div>
+            <button
+              class="share__submit-btn"
+              type="submit"
+              id="btnSendSchedule"
+            >
+              Share by email <img src="../static/send.svg" alt="" />
+            </button>
+          </form>
+        </dialog>
+
+        <dialog class="modal generate" formmethod="dialog">
+          <div class="modal__overlay"></div>
+          <span class="generate__title">
+            Select categories<span
+              >and number of exercises for each of them</span
+            >
+          </span>
+          <span class="generate__error hidden"></span>
+          <button
+            class="modal__close-btn btn"
+            id="btnCloseGenerate"
+            aria-label="Close generate schedule form"
+          >
+            <img src="../static/close.svg" alt="" />
+          </button>
+
+          <form class="generate__form" novalidate>
+            <div class="generate__inputs">
+              <div class="generate__input-control">
+                <label class="generate__label" for="chest-checkbox"
+                  >Chest</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="chest-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="chest-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                  disabled
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="back-checkbox">Back</label>
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="back-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="back-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="shoulders-checkbox"
+                  >Shoulders</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="shoulders-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="shoulders-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="neck-checkbox">Neck</label>
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="neck-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="neck-number"
+                  placeholder="0"
+                  min="0"
+                  max="2"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="upper-arms-checkbox"
+                  >Arms</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="upper-arms-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="upper-arms-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="lower-arms-checkbox"
+                  >Forearms</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="lower-arms-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="lower-arms-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="upper-legs-checkbox"
+                  >Legs</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="upper-legs-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="upper-legs-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="lower-legs-checkbox"
+                  >Calves</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="lower-legs-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="lower-legs-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="waist-checkbox"
+                  >Waist</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="waist-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="waist-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+              <div class="generate__input-control">
+                <label class="generate__label" for="cardio-checkbox"
+                  >Cardio</label
+                >
+                <input
+                  class="generate__checkbox"
+                  type="checkbox"
+                  id="cardio-checkbox"
+                />
+                <input
+                  class="generate__input"
+                  type="number"
+                  aria-label="Number of exercises"
+                  id="cardio-number"
+                  placeholder="0"
+                  min="0"
+                  max="10"
+                />
+              </div>
+            </div>
+            <button
+              class="generate__submit-btn"
+              type="submit"
+              id="btnGenerateSchedule"
+            >
+              Generate schedule
+            </button>
+          </form>
         </dialog>
       </main>
-      <footer class="footer"><p>This is footer</p></footer>
+      <footer class="footer">
+        <div class="footer__info">
+          <span>WorkoutApp</span>
+          <span>Bartosz Dudziak</span>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

@@ -1,0 +1,121 @@
+@use '../config/' as *;
+
+.preview {
+  @include media-sm {
+    width: min(75%, $bp-md);
+    border-radius: 0.5rem;
+  }
+
+  &[open] {
+    @include flex-layout(column, flex-start, center);
+  }
+}
+
+.preview__img-container {
+  @include flex-layout(row, center, center);
+  width: min(70%, 15rem);
+  aspect-ratio: 1;
+}
+
+.preview__img {
+  margin-inline: auto;
+}
+
+.preview__title {
+  font-size: $fs-500;
+  font-weight: $fw-700;
+  line-height: $lh-400;
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 35ch;
+  margin-block-end: 1rem;
+
+  @include media-md {
+    font-size: $fs-600;
+  }
+}
+
+.preview__instructions {
+  @include flex-layout(column);
+  gap: 0.5rem;
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.preview__instruction {
+  font-size: $fs-200;
+  line-height: $lh-400;
+  color: $clr-neutral-700;
+  font-weight: $fw-400;
+
+  @include media-sm {
+    font-size: $fs-300;
+  }
+
+  @include media-md {
+    font-size: $fs-400;
+    max-width: 60vw;
+  }
+}
+
+.preview__close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  max-width: 2.5rem;
+}
+
+.preview__control {
+  @include flex-layout(row, center, center);
+  gap: 1rem;
+  width: 100%;
+  margin-block: 1rem 1.25rem;
+}
+
+.preview__control-btn {
+  @include flex-layout(row, center, center);
+  svg {
+    pointer-events: none;
+    width: 1.75rem;
+    height: 1.75rem;
+
+    @include media-md {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    path {
+      transition: fill 0.3s;
+    }
+
+    rect {
+      transition: fill 0.3s;
+    }
+  }
+}
+
+.bookmark__toggle-btn {
+  path {
+    fill: transparent;
+    stroke: $clr-neutral-700;
+    stroke-width: 2px;
+  }
+
+  &--active {
+    path {
+      fill: $clr-success;
+    }
+  }
+}
+
+.schedule__toggle-btn {
+  rect {
+    stroke-width: 3px;
+  }
+
+  &--active {
+    rect {
+      fill: $clr-success;
+    }
+  }
+}

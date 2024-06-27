@@ -5,32 +5,28 @@
 @use './media' as *;
 
 @mixin section-title {
-  font-size: $fs-600;
+  font-size: $fs-500;
   font-weight: $fw-600;
   line-height: $lh-400;
   text-transform: uppercase;
-
   @include media-md {
-    font-size: $fs-700;
+    font-size: $fs-600;
   }
 }
 
 @mixin section-padding {
-  padding-block: 2rem;
-
+  padding-block: 1.5rem;
   @include media-md {
-    padding-block: 2.5rem;
+    padding-block: 2rem;
   }
-
   @include media-lg {
-    padding-block: 3rem;
+    padding-block: 2.5rem;
   }
 }
 
 @mixin btnTransition($duration: 300ms) {
   transition: transform $duration ease-out, background-color $duration ease-out;
 }
-
 @mixin btnHover {
   background-color: rgba($color: $clr-neutral-400, $alpha: 0.75);
   outline: 2px solid $clr-primary-300;

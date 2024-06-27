@@ -11,8 +11,12 @@
 }
 
 .header__title {
-  font-size: $fs-700;
+  font-size: $fs-600;
   font-weight: $fw-600;
+
+  @include media-md {
+    font-size: $fs-700;
+  }
 
   span {
     color: $clr-primary-300;
@@ -26,13 +30,19 @@
 
 .nav__list {
   @include flex-layout(row, space-between, center);
-  gap: 3rem;
+  gap: 2rem;
+  transition: inset 300ms ease-out;
+
+  @include media-md {
+    gap: 3rem;
+  }
+
+  > .nav__item {
+    transition: opacity 300ms ease-out;
+  }
 }
 
-.nav__link {
-  font-size: $fs-400;
-  font-weight: $fw-500;
-  text-transform: uppercase;
+.nav__item {
   position: relative;
   &::before {
     content: '';
@@ -42,7 +52,17 @@
     border-radius: 2px;
     background-color: $clr-primary-400;
     inset: auto 50% -0.5rem 50%;
-    transition: inset 300ms ease-out;
+    transition: inset 300ms ease-out, opacity 1s;
+  }
+}
+
+.nav__link {
+  font-size: $fs-300;
+  font-weight: $fw-500;
+  text-transform: uppercase;
+
+  @include media-md {
+    font-size: $fs-400;
   }
 }
 
@@ -50,7 +70,7 @@
   display: none;
 
   img {
-    width: 2rem;
+    width: 1.5rem;
     aspect-ratio: 1;
   }
 }
@@ -85,6 +105,7 @@
 
   .nav__link {
     font-weight: $fw-700;
+    font-size: $fs-400;
   }
 
   .nav__btn--open[aria-expanded='true'] {
@@ -95,10 +116,17 @@
 }
 
 @include media-hover {
-  .nav__link:hover {
-    transform: translateY(5px);
+  .nav__item:hover {
     &::before {
       inset: auto 0 -0.5rem 0;
     }
   }
+  .nav__list:has(.nav__item:hover) > .nav__item:not(:hover) {
+    opacity: 0.4;
+  }
+}
+
+.nav__item-bookmarks,
+.nav__item-schedule {
+  position: relative;
 }

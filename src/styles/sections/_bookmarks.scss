@@ -1,0 +1,121 @@
+@use '../config/' as *;
+
+.bookmarks {
+  @include flex-layout(column);
+  gap: 0.25rem;
+
+  position: fixed;
+  top: 20%; // as default
+  width: 100%;
+
+  overflow: hidden;
+  background-color: $clr-primary-300;
+  padding: 0.75rem 1rem 1.75rem 1rem;
+  box-shadow: 0 5px 25px rgba($color: $clr-neutral-700, $alpha: 0.25);
+  transition: left 300ms ease-out, opacity 300ms ease-out;
+
+  @include media-sm {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    width: min(80%, 600px);
+  }
+}
+
+.bookmarks[data-open='true'] {
+  left: 0%;
+  opacity: 1;
+}
+
+.bookmarks[data-open='false'] {
+  left: -100%;
+  opacity: 0;
+}
+
+.bookmarks__title {
+  font-size: $fs-400;
+  font-weight: $fw-600;
+  text-transform: uppercase;
+
+  > span {
+    position: relative;
+  }
+
+  .bookmarks-notification {
+    @include media-sm {
+      width: 1.3rem;
+      font-size: $fs-300;
+    }
+  }
+
+  @include media-sm {
+    font-size: $fs-600;
+  }
+}
+
+.bookmarks__item {
+  @include flex-layout(row, flex-start, center);
+  gap: 1rem;
+
+  @include media-sm {
+    gap: 2rem;
+  }
+}
+
+.bookmark {
+  font-size: $fs-300;
+  text-transform: capitalize;
+  font-weight: $fw-500;
+  background-color: $clr-neutral-200;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 200ms ease-out;
+  flex: 1;
+
+  @include media-sm {
+    font-size: $fs-400;
+  }
+
+  @include media-hover {
+    &:hover {
+      background-color: $clr-neutral-400;
+    }
+  }
+}
+
+.bookmarks__control {
+  @include flex-layout(row, flex-end, center);
+  gap: 1rem;
+}
+
+.bookmarks__close-btn,
+.bookmarks__clear-btn {
+  max-width: 2rem;
+}
+
+.bookmark__delete-btn {
+  max-width: 1.75rem;
+  aspect-ratio: 1;
+  background-color: $clr-primary-400;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+
+  @include media-sm {
+    max-width: 2rem;
+  }
+
+  @include media-hover {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.bookmarks__list {
+  @include grid-layout();
+  margin-block-start: 0.5rem;
+  gap: 0.75rem;
+  max-height: 50dvh;
+  overflow-y: auto;
+}
