@@ -1,4 +1,4 @@
-const KEY = 'f0e37b386fmsh09db0af793419e4p14105djsn8406c6b774e1';
+const KEY = '1fb3cfcb88msh3d2dcc170b2011dp1c3673jsnea756b40e2ca';
 const HOST = 'exercisedb.p.rapidapi.com';
 
 export const API_URL = 'https://exercisedb.p.rapidapi.com/exercises/';
@@ -17,7 +17,7 @@ export const AJAX = function (queryType, query) {
   );
 };
 
-export const MESSAGE_TIMEOUT = 4000;
+export const MESSAGE_TIMEOUT = 2000;
 export const SLIDER_DELAY = 6000;
 export const SCROLL_DELAY = 100;
 export const MAX_WIDTH_MOBILE_NAV = 576;

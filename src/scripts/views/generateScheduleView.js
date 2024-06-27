@@ -4,7 +4,7 @@ import { MAX_EXERCISES_PER_CATEGORY } from '../config';
 class GenerateScheduleView {
   _body = document.querySelector('body');
   _modal = document.querySelector('.generate');
-  _overlay = document.querySelector('.modal__overlay');
+  _overlay = this._modal.querySelector('.modal__overlay');
   _form = document.querySelector('.generate__form');
   _btnClose = document.querySelector('#btnCloseGenerate');
   _checkboxElements = document.querySelectorAll('.generate__checkbox');

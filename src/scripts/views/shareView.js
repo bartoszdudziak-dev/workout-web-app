@@ -5,6 +5,7 @@ import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 class ShareView {
   _body = document.querySelector('body');
   _modal = document.querySelector('.share');
+  _overlay = this._modal.querySelector('.modal__overlay');
   _form = document.querySelector('.share__form');
   _email = document.querySelector('#email');
   _btnClose = document.querySelector('#btnCloseShare');
@@ -48,7 +49,7 @@ class ShareView {
       });
     } catch (error) {
       if (error instanceof EmailJSResponseStatus) {
-        console.log('EMAILJS FAILED...', error);
+        console.error('EMAILJS FAILED...', error);
         return;
       }
       console.error(error);
@@ -56,7 +57,6 @@ class ShareView {
   }
 
   _generateExerciseList(schedule) {
-    console.log(schedule);
     return schedule.map(exercise => exercise.name.toUpperCase());
   }
 
@@ -106,6 +106,46 @@ class ShareView {
 
     observer.observe(this._modal, config);
     this._btnClose.addEventListener('click', this.close.bind(this));
+  }
+
+  startLoading() {
+    const markup = `${this._generateLoadingMarkup()}`;
+    this._overlay.insertAdjacentHTML('afterbegin', markup);
+    this._overlay.style.display = 'block';
+    this._modal.setAttribute('inert', '');
+  }
+
+  stopLoading() {
+    this._overlay.innerHTML = '';
+    this._overlay.style.display = 'none';
+    this._modal.removeAttribute('inert');
+  }
+
+  _generateLoadingMarkup() {
+    return `
+      <div class="load">
+        <svg
+          class="load__icon"
+          fill="#000000"
+          width="50px"
+          height="50px"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M18.91.28a1,1,0,0,0-.82.21,1,1,0,0,0-.36.77V5.45a1,1,0,0,0,.75,1,9.91,9.91,0,1,1-5,0,1,1,0,0,0,.75-1V1.26a1,1,0,0,0-.36-.77,1,1,0,0,0-.82-.21,16,16,0,1,0,5.82,0ZM16,30A14,14,0,0,1,12.27,2.51V4.7a11.91,11.91,0,1,0,7.46,0V2.51A14,14,0,0,1,16,30Z"
+          ></path>
+        </g>
+      </svg>
+      </div>
+    `;
   }
 
   _clear() {
