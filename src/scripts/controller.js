@@ -41,7 +41,7 @@ const controlSearchResultsByName = async function () {
     bookmarksView.close();
     scheduleView.close();
   } catch (error) {
-    messageView.displayErrorMessage('Query not found!');
+    // messageView.displayErrorMessage('Query not found!');
     console.error(error);
   }
 };
