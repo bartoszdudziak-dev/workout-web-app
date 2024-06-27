@@ -18,10 +18,7 @@ const controlSearchResultsByName = async function () {
     // Get query and set queryType
     const queryType = 'name';
     const query = searchView.getQuery();
-    if (!query) {
-      messageView.displayErrorMessage('Query not found!');
-      return;
-    }
+    if (!query) return;
 
     // Remove hidden class, scroll to results, render loading
     resultsView.displaySection();
@@ -44,6 +41,7 @@ const controlSearchResultsByName = async function () {
     bookmarksView.close();
     scheduleView.close();
   } catch (error) {
+    messageView.displayErrorMessage('Query not found!');
     console.error(error);
   }
 };
