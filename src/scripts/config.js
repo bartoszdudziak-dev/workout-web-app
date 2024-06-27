@@ -19,7 +19,7 @@ export const AJAX = function (queryType, query) {
 
 export const MESSAGE_TIMEOUT = 2000;
 export const SLIDER_DELAY = 6000;
-export const SCROLL_DELAY = 100;
+export const SCROLL_DELAY = 150;
 export const MAX_WIDTH_MOBILE_NAV = 576;
 export const RESULTS_PER_PAGE = 8;
 export const MAX_MUSCLES_LENGTH = 3;
