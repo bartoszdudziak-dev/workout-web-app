@@ -18,7 +18,10 @@ const controlSearchResultsByName = async function () {
     // Get query and set queryType
     const queryType = 'name';
     const query = searchView.getQuery();
-    if (!query) return;
+    if (!query) {
+      messageView.displayErrorMessage('Query not found!');
+      return;
+    }
 
     // Remove hidden class, scroll to results, render loading
     resultsView.displaySection();
