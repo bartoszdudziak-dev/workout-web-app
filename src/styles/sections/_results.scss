@@ -22,6 +22,7 @@
   @include grid-layout(1);
   gap: 0.5rem;
   grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(8, clamp(2.5rem, 2.036vw + 2.023rem, 3rem));
 }
 
 .results__item {
