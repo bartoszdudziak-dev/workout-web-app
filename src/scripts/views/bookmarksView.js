@@ -1,70 +1,41 @@
-import View from './View';
-import { getHeaderHeight } from '../features/layout';
+import SectionPanelView from './SectionPanelView';
 
-class BookmarksView extends View {
+class BookmarksView extends SectionPanelView {
   _parentEl = document.querySelector('.bookmarks__list');
-  _bookmarksContainer = this._parentEl.parentElement;
+  _sectionContainer = this._parentEl.parentElement;
+
   _btnOpen = document.querySelector('#bookmarks');
   _btnClose = document.querySelector('#btnCloseBookmarks');
   _btnClear = document.querySelector('#btnClearBookmarks');
+
   _notifications = document.querySelectorAll('.bookmarks-notification');
   _errorMessage = `You don't have any bookmarks!`;
 
   constructor() {
     super();
+    this.close();
     this._btnClose.addEventListener('click', this.close.bind(this));
-    this._bookmarksContainer.setAttribute('inert', '');
-    window.addEventListener('resize', this._adjustTopPosition.bind(this));
+    window.addEventListener('resize', this.adjustTopPosition.bind(this));
   }
 
-  addHandlerClick(handler) {
-    this._btnOpen.addEventListener('click', e => {
-      this._adjustTopPosition();
-      e.preventDefault();
-      this.open();
-      handler();
-    });
-  }
-
+  // Publisher handler functions
   addHandlerDeleteBookmark(handler) {
     this._parentEl.addEventListener('click', e => {
       const bookmark = e.target.closest('.bookmark__delete-btn');
       if (!bookmark) return;
 
-      const id = bookmark.parentElement
-        .querySelector('.bookmark')
-        .getAttribute('href')
-        .slice(1);
+      const id = this._getExerciseId(bookmark);
 
       handler(id);
     });
   }
 
-  addHandlerClearBookmarks(handler) {
-    this._btnClear.addEventListener('click', handler);
-  }
-
-  updateBookmarkNotification(counter) {
-    this._notifications.forEach(notifcation => {
-      if (counter === 0) {
-        notifcation.classList.add('hidden');
-        notifcation.textContent = '';
-      } else {
-        notifcation.classList.remove('hidden');
-        notifcation.textContent = counter;
-      }
-    });
-  }
-
-  open() {
-    this._bookmarksContainer.setAttribute('data-open', 'true');
-    this._bookmarksContainer.removeAttribute('inert', '');
-    this._btnClose.focus();
-  }
-
-  close() {
-    this._bookmarksContainer.setAttribute('data-open', 'false');
-    this._bookmarksContainer.setAttribute('inert', '');
+  // "Private" methods
+  _getExerciseId(button) {
+    return button.parentElement.parentElement
+      .querySelector('.bookmark')
+      .getAttribute('href')
+      .slice(1);
   }
 
   _generateMarkup() {
@@ -86,10 +57,6 @@ class BookmarksView extends View {
         </button>
       </li>
     `;
-  }
-
-  _adjustTopPosition() {
-    this._bookmarksContainer.style.top = getHeaderHeight() + 'px';
   }
 }
 export default new BookmarksView();

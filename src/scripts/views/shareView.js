@@ -72,8 +72,8 @@ class ShareView {
     this._modal.showModal();
     disableBodyScroll(this._body);
     this._clear();
-
     this._observeModal();
+    this._btnClose.focus();
   }
 
   close() {

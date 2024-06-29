@@ -3,8 +3,9 @@ export default class View {
   _errorMessage = 'Something went wrong!';
 
   render(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
+    if (!data || (Array.isArray(data) && data.length === 0)) {
       return this._renderError();
+    }
 
     this._data = data;
     this._clear();
