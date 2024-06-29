@@ -5,6 +5,7 @@ import { SCROLL_DELAY } from '../config';
 
 class ResultsView extends View {
   _parentEl = document.querySelector('.results__list');
+  _errorMessage = 'Not found';
 
   _generateMarkup() {
     return this._data

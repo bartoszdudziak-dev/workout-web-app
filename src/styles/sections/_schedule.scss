@@ -91,13 +91,16 @@
   }
 }
 
-.schedule__delete-btn {
+.schedule__exercise-control {
+  @include flex-layout(row);
+  gap: 0.5rem;
+}
+
+.schedule-btn {
   max-width: 1.75rem;
   aspect-ratio: 1;
-  background-color: $clr-primary-400;
   border-radius: 0.25rem;
   padding: 0.25rem;
-  opacity: 1;
   transition: opacity 200ms ease-out;
 
   @include media-sm {
@@ -109,6 +112,27 @@
       opacity: 0.5;
     }
   }
+
+  svg {
+    width: inherit;
+    height: inherit;
+    transition: fill 200ms ease-out;
+  }
+}
+
+.schedule__delete-btn {
+  background-color: $clr-primary-400;
+}
+
+.schedule__mark-btn {
+  background-color: $clr-neutral-200;
+  &--active {
+    background-color: $clr-success;
+  }
+}
+
+.schedule__reroll-btn {
+  background-color: $clr-neutral-200;
 }
 
 .schedule__list {

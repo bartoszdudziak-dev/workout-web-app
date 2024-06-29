@@ -12,6 +12,7 @@ import scheduleView from './views/scheduleView';
 import shareView from './views/shareView';
 import generateScheduleView from './views/generateScheduleView';
 import messageView from './views/messageView';
+import aboutView from './views/aboutView';
 
 const controlSearchResultsByName = async function () {
   try {
@@ -41,7 +42,7 @@ const controlSearchResultsByName = async function () {
     bookmarksView.close();
     scheduleView.close();
   } catch (error) {
-    // messageView.displayErrorMessage('Query not found!');
+    messageView.displayErrorMessage('Query not found!');
     console.error(error);
   }
 };
@@ -124,7 +125,7 @@ const controlBookmarkState = function () {
   bookmarksView.render(model.state.bookmarks);
 
   // Update bookmarks notifications
-  bookmarksView.updateBookmarkNotification(model.state.bookmarks.length);
+  bookmarksView.updateNotification(model.state.bookmarks.length);
 };
 
 const controlBookmarks = function () {
@@ -145,7 +146,7 @@ const controlDeleteBookmark = function (id) {
   bookmarksView.render(model.state.bookmarks);
 
   // Update bookmarks notifications
-  bookmarksView.updateBookmarkNotification(model.state.bookmarks.length);
+  bookmarksView.updateNotification(model.state.bookmarks.length);
 };
 
 const controlClearBookmarks = function () {
@@ -156,7 +157,7 @@ const controlClearBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 
   // Update bookmarks notifications
-  bookmarksView.updateBookmarkNotification(model.state.bookmarks.length);
+  bookmarksView.updateNotification(model.state.bookmarks.length);
 };
 
 // Control Schedule
@@ -169,17 +170,17 @@ const controlSchedule = function () {
 };
 
 const controlScheduleExerciseState = function () {
-  // Toggle bookmark add or remove
+  // Toggle exercise state is it in schedule or not
   if (model.state.exercise.scheduled) {
     model.deleteExercise(model.state.exercise.id);
   } else {
     model.addExercise(model.state.exercise);
   }
-  // Render bookmarks
+  // Render schedule
   scheduleView.render(model.state.schedule);
 
   // Update schedule notifications
-  scheduleView.updateScheduleNotification(model.state.schedule.length);
+  scheduleView.updateNotification(model.state.schedule.length);
 };
 
 const controlDeleteScheduleExercise = function (id) {
@@ -192,7 +193,7 @@ const controlDeleteScheduleExercise = function (id) {
   scheduleView.render(model.state.schedule);
 
   // Update schedule notifications
-  scheduleView.updateScheduleNotification(model.state.schedule.length);
+  scheduleView.updateNotification(model.state.schedule.length);
 };
 
 const controlClearSchedule = function () {
@@ -203,7 +204,7 @@ const controlClearSchedule = function () {
   scheduleView.render(model.state.schedule);
 
   // Update schedule notifications
-  scheduleView.updateScheduleNotification(model.state.schedule.length);
+  scheduleView.updateNotification(model.state.schedule.length);
 };
 
 const controlOpenShareModal = function () {
@@ -231,7 +232,6 @@ const controlShare = async function () {
 };
 
 const controlOpenGenerateModal = function () {
-  scheduleView.close();
   generateScheduleView.open();
 };
 
@@ -250,15 +250,12 @@ const controlGenerateSchedule = async function () {
 
     // Render the new schedule
     scheduleView.render(model.state.schedule);
-    scheduleView.updateScheduleNotification(model.state.schedule.length);
+    scheduleView.updateNotification(model.state.schedule.length);
 
     // Close generate container
     generateScheduleView.stopLoading();
     generateScheduleView.close();
     messageView.displaySuccessMessage('Schedule generated!');
-
-    // Open schedule view
-    scheduleView.open();
   } catch (error) {
     generateScheduleView.stopLoading();
     messageView.displayErrorMessage('Something went wrong!');
@@ -266,11 +263,15 @@ const controlGenerateSchedule = async function () {
   }
 };
 
+const controlToggleExerciseStatus = function (id) {
+  model.toggleMarkExercise(id);
+};
+
 const app = function () {
   window.addEventListener('load', () => {
     adjustMainPadding();
-    bookmarksView.updateBookmarkNotification(model.state.bookmarks.length);
-    scheduleView.updateScheduleNotification(model.state.schedule.length);
+    bookmarksView.updateNotification(model.state.bookmarks.length);
+    scheduleView.updateNotification(model.state.schedule.length);
   });
   window.addEventListener('resize', adjustMainPadding);
   mobileMenu.init();
@@ -285,15 +286,16 @@ const app = function () {
   previewView.addHandlerBookmarkState(controlBookmarkState);
   previewView.addHandlerScheduleExerciseState(controlScheduleExerciseState);
 
-  bookmarksView.addHandlerClick(controlBookmarks);
+  bookmarksView.addHandlerOpenSection(controlBookmarks);
   bookmarksView.addHandlerDeleteBookmark(controlDeleteBookmark);
-  bookmarksView.addHandlerClearBookmarks(controlClearBookmarks);
+  bookmarksView.addHandlerClear(controlClearBookmarks);
 
-  scheduleView.addHandlerClick(controlSchedule);
+  scheduleView.addHandlerOpenSection(controlSchedule);
   scheduleView.addHandlerDeleteExercise(controlDeleteScheduleExercise);
-  scheduleView.addHandlerClearSchedule(controlClearSchedule);
+  scheduleView.addHandlerClear(controlClearSchedule);
   scheduleView.addHandlerClickShare(controlOpenShareModal);
   scheduleView.addHandlerClickGenerate(controlOpenGenerateModal);
+  scheduleView.addHandlerToggleExerciseStatus(controlToggleExerciseStatus);
 
   shareView.addHandlerSubmit(controlShare);
   generateScheduleView.addHandlerSubmit(controlGenerateSchedule);

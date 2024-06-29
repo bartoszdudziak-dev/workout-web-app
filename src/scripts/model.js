@@ -149,6 +149,16 @@ export const clearBookmarks = function () {
 export const addExercise = function (exercise) {
   state.schedule.push(exercise);
   state.exercise.scheduled = true;
+  state.schedule.at(-1).done = false;
+  console.log(state.schedule);
+  updateLocalStorage('schedule', state.schedule);
+};
+
+export const toggleMarkExercise = function (id) {
+  const exercise = state.schedule.find(el => el.id === id);
+  if (!exercise.done) exercise.done = true;
+  else exercise.done = false;
+
   updateLocalStorage('schedule', state.schedule);
 };
 
