@@ -14,6 +14,9 @@ import generateScheduleView from './views/generateScheduleView';
 import messageView from './views/messageView';
 import aboutView from './views/aboutView';
 
+import 'core-js';
+import 'regenerator-runtime/runtime';
+
 const controlSearchResultsByName = async function () {
   try {
     // Get query and set queryType
