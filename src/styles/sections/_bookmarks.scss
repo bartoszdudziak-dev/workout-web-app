@@ -55,6 +55,7 @@
 .bookmarks__item {
   @include flex-layout(row, flex-start, center);
   gap: 1rem;
+  overflow: hidden;
 
   @include media-sm {
     gap: 2rem;
@@ -68,7 +69,12 @@
   background-color: $clr-neutral-200;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  transition: background-color 200ms ease-out;
+  transition: background-color 200ms ease-out, transform 200ms ease-out;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
   flex: 1;
 
   @include media-sm {
@@ -78,6 +84,7 @@
   @include media-hover {
     &:hover {
       background-color: $clr-neutral-400;
+      transform: scale(0.98);
     }
   }
 }
@@ -92,14 +99,12 @@
   max-width: 2rem;
 }
 
-.bookmark__delete-btn {
+.bookmark-btn {
   max-width: 1.75rem;
   aspect-ratio: 1;
-  background-color: $clr-primary-400;
+  margin-inline-end: 0.25rem;
   border-radius: 0.25rem;
   padding: 0.25rem;
-  opacity: 1;
-  transition: opacity 200ms ease-out;
 
   @include media-sm {
     max-width: 2rem;
@@ -107,9 +112,18 @@
 
   @include media-hover {
     &:hover {
-      opacity: 0.5;
+      opacity: 0.75;
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
   }
+}
+
+.bookmark__delete-btn {
+  background-color: $clr-primary-400;
+  transition: opacity 200ms ease-out;
 }
 
 .bookmarks__list {

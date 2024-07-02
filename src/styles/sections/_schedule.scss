@@ -54,6 +54,7 @@
 
 .schedule__item {
   @include flex-layout(row, flex-start, center);
+  overflow: hidden;
   gap: 1rem;
 
   @include media-sm {
@@ -68,7 +69,12 @@
   background-color: $clr-neutral-200;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  transition: background-color 200ms ease-out;
+  transition: background-color 200ms ease-out, transform 200ms ease-out;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
   flex: 1;
 
   @include media-sm {
@@ -78,6 +84,7 @@
   @include media-hover {
     &:hover {
       background-color: rgba($color: $clr-primary-300, $alpha: 0.25);
+      transform: scale(0.98);
     }
   }
 }
@@ -109,36 +116,81 @@
 
   @include media-hover {
     &:hover {
-      opacity: 0.5;
+      opacity: 0.75;
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
   }
 
   svg {
     width: inherit;
     height: inherit;
-    transition: fill 200ms ease-out;
   }
 }
 
 .schedule__delete-btn {
   background-color: $clr-primary-400;
+  margin-inline-end: 0.25rem;
 }
 
 .schedule__mark-btn {
   background-color: $clr-neutral-200;
+  transition: background-color 300ms ease-out;
+  svg path {
+    transition: stroke 300ms ease-out;
+  }
+
   &--active {
     background-color: $clr-success;
+
+    svg {
+      path {
+        stroke: $clr-neutral-700;
+      }
+    }
   }
 }
 
 .schedule__reroll-btn {
   background-color: $clr-neutral-200;
+
+  &--active {
+    opacity: 0.75;
+    pointer-events: none;
+    transform: scale(0.95);
+    svg {
+      animation: rotate 1s infinite linear;
+    }
+  }
 }
 
-.schedule__list {
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.schedule__list,
+.schedule__list-category {
   @include grid-layout();
   margin-block-start: 0.5rem;
   gap: 0.75rem;
   max-height: 50dvh;
   overflow-y: auto;
+}
+
+.schedule__list-category {
+  margin-block-start: 0;
+  gap: 0.5rem;
+}
+
+.schedule__category {
+  text-transform: uppercase;
+  font-weight: $fw-600;
+  font-size: $fs-500;
 }

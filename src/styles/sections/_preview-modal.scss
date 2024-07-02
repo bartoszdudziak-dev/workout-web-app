@@ -74,6 +74,7 @@
 
 .preview__control-btn {
   @include flex-layout(row, center, center);
+  transition: opacity 300ms ease-out;
   svg {
     pointer-events: none;
     width: 1.75rem;
@@ -90,6 +91,16 @@
 
     rect {
       transition: fill 0.3s;
+    }
+  }
+
+  @include media-hover {
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
   }
 }
