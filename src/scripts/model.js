@@ -52,6 +52,7 @@ export const loadExercise = async function (id) {
     state.exercise = {
       id: result.id,
       name: result.name,
+      category: result.bodyPart,
       instructions: result.instructions,
       image: result.gifUrl,
     };
@@ -88,7 +89,7 @@ export const generateSchedule = async function (schedule) {
       for (let i = 0; i < element.exercises; i++) {
         // Leave loop when there is no more exercises in received data
         // e.g Neck category has only two exercises
-        if (i === result.length) return;
+        if (i === result.length) break;
         let id;
         let randomNumber;
         do {
@@ -99,8 +100,14 @@ export const generateSchedule = async function (schedule) {
 
           // Repeat operation if the choosen was already picked
         } while (uniqueIdSet.has(id));
+        const exercise = result[randomNumber];
+        newSchedule.push({
+          id: exercise.id,
+          name: exercise.name,
+          category: exercise.bodyPart,
+          done: false,
+        });
         uniqueIdSet.add(id);
-        newSchedule.push(result[randomNumber]);
       }
     }
 
@@ -110,6 +117,59 @@ export const generateSchedule = async function (schedule) {
     updateLocalStorage('schedule', state.schedule);
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const rerollExercise = async function (pickedId) {
+  try {
+    const uniqueIdSet = new Set(state.schedule.map(el => el.id));
+    const pickedExercise = state.schedule.find(el => el.id === pickedId);
+    const pickedIndex = state.schedule.findIndex(el => el.id === pickedId);
+
+    // Length of exercises with same category as choosen one
+    const categoryCounter = state.schedule.reduce(
+      (accumulator, currentItem) => {
+        if (currentItem.category === pickedExercise.category) accumulator++;
+        return accumulator;
+      },
+      0
+    );
+
+    const response = await AJAX('bodyPart', pickedExercise.category);
+    if (!response.ok) throw new Error('Request error');
+
+    const result = await response.json();
+    if (!result) throw new Error('No result');
+
+    let id;
+    let randomNumber;
+    do {
+      // Escape if there is no more exercises with given category
+      if (categoryCounter === result.length)
+        throw new Error('No more exercises with this category');
+
+      // Get random index in range of recived results
+      randomNumber = Math.floor(Math.random() * result.length);
+
+      // Id of randomly choosen exercise
+      id = result[randomNumber].id;
+
+      // Repeat operation if the choosen was already picked
+    } while (uniqueIdSet.has(id));
+
+    const newExercise = {
+      id: result[randomNumber].id,
+      name: result[randomNumber].name,
+      category: result[randomNumber].bodyPart,
+      done: false,
+    };
+
+    // Replace picked exercise by randomly choosen one
+    state.schedule.splice(pickedIndex, 1, newExercise);
+
+    updateLocalStorage('schedule', state.schedule);
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -147,10 +207,13 @@ export const clearBookmarks = function () {
 
 // Add specific exercise to schedule
 export const addExercise = function (exercise) {
-  state.schedule.push(exercise);
+  state.schedule.push({
+    id: exercise.id,
+    name: exercise.name,
+    category: exercise.category,
+    done: false,
+  });
   state.exercise.scheduled = true;
-  state.schedule.at(-1).done = false;
-  console.log(state.schedule);
   updateLocalStorage('schedule', state.schedule);
 };
 

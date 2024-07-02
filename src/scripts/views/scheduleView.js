@@ -23,10 +23,10 @@ class ScheduleView extends SectionPanelView {
   // Publisher handler functions
   addHandlerDeleteExercise(handler) {
     this._parentEl.addEventListener('click', e => {
-      const exercise = e.target.closest('.schedule__delete-btn');
-      if (!exercise) return;
+      const btn = e.target.closest('.schedule__delete-btn');
+      if (!btn) return;
 
-      const id = this._getExerciseId(exercise);
+      const id = this._getExerciseId(btn);
 
       handler(id);
     });
@@ -34,12 +34,12 @@ class ScheduleView extends SectionPanelView {
 
   addHandlerToggleExerciseStatus(handler) {
     this._parentEl.addEventListener('click', e => {
-      const exercise = e.target.closest('.schedule__mark-btn');
-      if (!exercise) return;
+      const btn = e.target.closest('.schedule__mark-btn');
+      if (!btn) return;
 
-      const id = this._getExerciseId(exercise);
+      const id = this._getExerciseId(btn);
 
-      exercise.classList.toggle('schedule__mark-btn--active');
+      btn.classList.toggle('schedule__mark-btn--active');
       handler(id);
     });
   }
@@ -52,6 +52,23 @@ class ScheduleView extends SectionPanelView {
     this._btnGenerate.addEventListener('click', handler);
   }
 
+  addHandlerClickReroll(handler) {
+    this._parentEl.addEventListener('click', async e => {
+      try {
+        const btn = e.target.closest('.schedule__reroll-btn');
+        if (!btn) return;
+
+        const id = this._getExerciseId(btn);
+
+        btn.classList.add('schedule__reroll-btn--active');
+        await handler(id);
+        btn.classList.remove('schedule__reroll-btn--active');
+      } catch (error) {
+        throw error;
+      }
+    });
+  }
+
   // "Private" methods
   _getExerciseId(button) {
     return button.parentElement.parentElement
@@ -61,10 +78,57 @@ class ScheduleView extends SectionPanelView {
   }
 
   _generateMarkup() {
-    const markup = this._data
-      .map(exercise => this._generateScheduleItem(exercise))
+    const data = this._sortData();
+    const markup = data
+      .map(category => this._generateCategoryList(category))
       .join('');
+
     return markup;
+  }
+
+  _sortData() {
+    // Get unique categories
+    const categoriesSet = new Set(this._data.map(el => el.category));
+
+    // Convert categories into object
+    const categoriesObj = Object.fromEntries(
+      Array.from(categoriesSet, category => [category, []])
+    );
+
+    // Sort exercises into their categories
+    this._data.forEach(exercise => {
+      for (const key of Object.keys(categoriesObj)) {
+        if (key === exercise.category) {
+          categoriesObj[key].push(exercise);
+          break;
+        }
+      }
+    });
+
+    return Object.entries(categoriesObj);
+  }
+
+  _generateCategoryList(category) {
+    return `
+      <ul class="schedule__list-category">
+        <li class="schedule__category">${this._generateCategoryName(
+          category[0]
+        )}</li>
+        ${category[1]
+          .map(item => {
+            return this._generateScheduleItem(item);
+          })
+          .join(' ')}
+      </ul>
+    `;
+  }
+
+  _generateCategoryName(category) {
+    if (category === 'upper legs') return 'legs';
+    if (category === 'lower legs') return 'calves';
+    if (category === 'upper arms') return 'arms';
+    if (category === 'lower arms') return 'forearms';
+    return category;
   }
 
   _generateScheduleItem(item) {

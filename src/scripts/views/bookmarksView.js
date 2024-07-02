@@ -21,10 +21,10 @@ class BookmarksView extends SectionPanelView {
   // Publisher handler functions
   addHandlerDeleteBookmark(handler) {
     this._parentEl.addEventListener('click', e => {
-      const bookmark = e.target.closest('.bookmark__delete-btn');
-      if (!bookmark) return;
+      const btn = e.target.closest('.bookmark__delete-btn');
+      if (!btn) return;
 
-      const id = this._getExerciseId(bookmark);
+      const id = this._getExerciseId(btn);
 
       handler(id);
     });
@@ -50,7 +50,7 @@ class BookmarksView extends SectionPanelView {
       <li class="bookmarks__item">
         <a class="bookmark" href="#${item.id}">${item.name}</a
         ><button
-          class="bookmark__delete-btn"
+          class="bookmark-btn bookmark__delete-btn"
           aria-label="Delete bookmark"
         >
           <img src="delete.svg" alt="" />

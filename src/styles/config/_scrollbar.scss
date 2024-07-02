@@ -1,0 +1,51 @@
+@use './colors' as *;
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $clr-neutral-400;
+  border-radius: 0.15rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $clr-neutral-700;
+  border: 0.2rem solid $clr-neutral-400;
+  border-radius: 0.25rem;
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: $clr-neutral-700 $clr-neutral-400;
+    scrollbar-width: thin;
+  }
+}
+
+.schedule__list,
+.bookmarks__list {
+  overscroll-behavior: contain;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $clr-neutral-200;
+    border-radius: 0.15rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $clr-neutral-700;
+    border: 0.2rem solid $clr-neutral-200;
+    border-radius: 0.25rem;
+  }
+
+  @supports (scrollbar-color: red blue) {
+    & {
+      scrollbar-color: $clr-neutral-700 $clr-neutral-200;
+      scrollbar-width: thin;
+      scrollbar-gutter: stable;
+    }
+  }
+}

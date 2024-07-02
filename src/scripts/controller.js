@@ -176,8 +176,9 @@ const controlScheduleExerciseState = function () {
   } else {
     model.addExercise(model.state.exercise);
   }
-  // Render schedule
-  scheduleView.render(model.state.schedule);
+
+  // // Render schedule
+  // scheduleView.render(model.state.schedule);
 
   // Update schedule notifications
   scheduleView.updateNotification(model.state.schedule.length);
@@ -267,6 +268,19 @@ const controlToggleExerciseStatus = function (id) {
   model.toggleMarkExercise(id);
 };
 
+const controlRerollExercise = async function (id) {
+  try {
+    await model.rerollExercise(id);
+
+    scheduleView.render(model.state.schedule);
+
+    messageView.displaySuccessMessage('Reroll completed');
+  } catch (error) {
+    console.error(error);
+    messageView.displayErrorMessage('Reroll failed');
+  }
+};
+
 const app = function () {
   window.addEventListener('load', () => {
     adjustMainPadding();
@@ -296,6 +310,7 @@ const app = function () {
   scheduleView.addHandlerClickShare(controlOpenShareModal);
   scheduleView.addHandlerClickGenerate(controlOpenGenerateModal);
   scheduleView.addHandlerToggleExerciseStatus(controlToggleExerciseStatus);
+  scheduleView.addHandlerClickReroll(controlRerollExercise);
 
   shareView.addHandlerSubmit(controlShare);
   generateScheduleView.addHandlerSubmit(controlGenerateSchedule);
