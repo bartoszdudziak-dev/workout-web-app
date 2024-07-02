@@ -15,7 +15,12 @@ class AboutView {
 
   _open() {
     this._modal.showModal();
-    disableBodyScroll(this._body);
+
+    // Idk why but it doesn't work without any delay
+    setTimeout(() => {
+      disableBodyScroll(this._body);
+    }, 10);
+
     this._observeModal();
     this._btnClose.focus();
   }
