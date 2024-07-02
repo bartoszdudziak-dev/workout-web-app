@@ -6,13 +6,6 @@
   }
 }
 
-.share__close-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  max-width: 2.5rem;
-}
-
 .share__form {
   @include flex-layout(column);
   gap: 2.5rem;
