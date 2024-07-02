@@ -194,7 +194,6 @@ export const addBookmark = function (exercise) {
 export const deleteBookmark = function (id) {
   const index = state.bookmarks.findIndex(bookmark => bookmark.id === id);
   state.bookmarks.splice(index, 1);
-  state.exercise.bookmarked = false;
   updateLocalStorage('bookmarks', state.bookmarks);
 };
 
@@ -229,7 +228,6 @@ export const toggleMarkExercise = function (id) {
 export const deleteExercise = function (id) {
   const index = state.schedule.findIndex(exercise => exercise.id === id);
   state.schedule.splice(index, 1);
-  state.exercise.scheduled = false;
   updateLocalStorage('schedule', state.schedule);
 };
 
