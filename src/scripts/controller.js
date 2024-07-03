@@ -1,3 +1,5 @@
+import allComponents from './components/allComponents';
+
 import * as model from './model';
 import { adjustMainPadding } from './features/layout';
 import mobileMenu from './features/mobileMenu';
