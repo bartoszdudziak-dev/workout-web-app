@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { PUBLIC_ID, SERVICE_ID, TEMPLATE_ID } from '../config';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import 'dotenv/config';
 
 class ShareView {
   _body = document.querySelector('body');
@@ -44,9 +44,14 @@ class ShareView {
         subject: 'Workout Schedule',
       };
 
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, parms, {
-        publicKey: PUBLIC_ID,
-      });
+      await emailjs.send(
+        process.env.EMAIL_SERVICE_ID,
+        process.env.EMAIL_TEMPLATE_ID,
+        parms,
+        {
+          publicKey: process.env.EMAIL_PUBLIC_ID,
+        }
+      );
     } catch (error) {
       if (error instanceof EmailJSResponseStatus) {
         console.error('EMAILJS FAILED...', error);

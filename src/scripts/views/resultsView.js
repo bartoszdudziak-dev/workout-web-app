@@ -19,7 +19,7 @@ class ResultsView extends View {
         <a class="exercise" href="#${exercise.id}">
           <img
             class="exercise__category-img"
-            src="/${exercise.category.replace(' ', '')}.png"
+            src="/${exercise.category.replace(' ', '')}.webp"
             alt=""
           />
           <span class="exercise__name">${exercise.name}</span>

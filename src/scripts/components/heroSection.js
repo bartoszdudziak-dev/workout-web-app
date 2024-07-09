@@ -22,27 +22,27 @@ export class HeroSection extends HTMLElement {
             <div class="slider">
               <img
                 class="slider__img"
-                src="slider_image_1.jpg"
+                src="slider_image_1.webp"
                 alt=""
               />
               <img
                 class="slider__img"
-                src="slider_image_2.jpg"
+                src="slider_image_2.webp"
                 alt=""
               />
               <img
                 class="slider__img"
-                src="slider_image_3.jpg"
+                src="slider_image_3.webp"
                 alt=""
               />
               <img
                 class="slider__img"
-                src="slider_image_4.jpg"
+                src="slider_image_4.webp"
                 alt=""
               />
               <img
                 class="slider__img"
-                src="slider_image_5.jpg"
+                src="slider_image_5.webp"
                 alt=""
               />
             </div>
@@ -52,29 +52,29 @@ export class HeroSection extends HTMLElement {
             <div class="categories__grid">
               <button class="category" id="chest">
                 <p class="category__name">Chest</p>
-                <img class="category__img" src="chest.png" alt="" />
+                <img class="category__img" src="chest.webp" alt="" />
               </button>
               <button class="category" id="back">
                 <p class="category__name">Back</p>
-                <img class="category__img" src="back.png" alt="" />
+                <img class="category__img" src="back.webp" alt="" />
               </button>
               <button class="category" id="shoulders">
                 <p class="category__name">Shoulders</p>
                 <img
                   class="category__img"
-                  src="shoulders.png"
+                  src="shoulders.webp"
                   alt=""
                 />
               </button>
               <button class="category" id="neck">
                 <p class="category__name">Neck</p>
-                <img class="category__img" src="neck.png" alt="" />
+                <img class="category__img" src="neck.webp" alt="" />
               </button>
               <button class="category" id="upper-arms">
                 <p class="category__name">Arms</p>
                 <img
                   class="category__img"
-                  src="upperarms.png"
+                  src="upperarms.webp"
                   alt=""
                 />
               </button>
@@ -82,7 +82,7 @@ export class HeroSection extends HTMLElement {
                 <p class="category__name">Forearms</p>
                 <img
                   class="category__img"
-                  src="lowerarms.png"
+                  src="lowerarms.webp"
                   alt=""
                 />
               </button>
@@ -90,7 +90,7 @@ export class HeroSection extends HTMLElement {
                 <p class="category__name">Legs</p>
                 <img
                   class="category__img"
-                  src="upperlegs.png"
+                  src="upperlegs.webp"
                   alt=""
                 />
               </button>
@@ -98,19 +98,19 @@ export class HeroSection extends HTMLElement {
                 <p class="category__name">Calves</p>
                 <img
                   class="category__img"
-                  src="lowerlegs.png"
+                  src="lowerlegs.webp"
                   alt=""
                 />
               </button>
               <button class="category" id="waist">
                 <p class="category__name">Waist</p>
-                <img class="category__img" src="waist.png" alt="" />
+                <img class="category__img" src="waist.webp" alt="" />
               </button>
               <button class="category" id="cardio">
                 <p class="category__name">Cardio</p>
                 <img
                   class="category__img"
-                  src="cardio.png"
+                  src="cardio.webp"
                   alt=""
                 />
               </button>

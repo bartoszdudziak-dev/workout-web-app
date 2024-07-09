@@ -40,9 +40,6 @@ const controlSearchResultsByName = async function () {
     // Render pagination
     paginationView.render(model.state.search);
 
-    // Scroll to results
-    resultsView.scrollToView();
-
     // Hide bookmark and schedule sections if opened
     bookmarksView.close();
     scheduleView.close();
@@ -73,13 +70,11 @@ const controlSearchResultsByCategory = async function () {
     // Render pagination
     paginationView.render(model.state.search);
 
-    // Scroll to results
-    resultsView.scrollToView();
-
     // Hide bookmark and schedule section if opened
     bookmarksView.close();
     scheduleView.close();
   } catch (error) {
+    messageView.displayErrorMessage();
     console.error(error);
   }
 };
@@ -96,10 +91,6 @@ const controlPreview = async function () {
   // Get id from URL
   const id = window.location.hash.slice(1);
   if (!id) return;
-
-  // Hide bookmark and schedule of opened
-  bookmarksView.close();
-  scheduleView.close();
 
   // Open model and render loading
   previewView.open();
