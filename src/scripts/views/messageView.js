@@ -4,13 +4,13 @@ class MessageView {
   #messageEl = document.querySelector('.message');
   #messageTimeout;
 
-  displaySuccessMessage(message) {
+  displaySuccessMessage(message = 'Success') {
     this.#displayMessage(message);
     this.#messageEl.classList.remove('warning');
     this.#messageEl.classList.add('success');
   }
 
-  displayErrorMessage(message) {
+  displayErrorMessage(message = 'Something went wrong') {
     this.#displayMessage(message);
     this.#messageEl.classList.remove('success');
     this.#messageEl.classList.add('warning');

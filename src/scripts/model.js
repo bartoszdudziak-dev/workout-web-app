@@ -1,5 +1,5 @@
-import { RESULTS_PER_PAGE, AJAX } from './config';
-// import data from './test.json'; // TESTING
+import { RESULTS_PER_PAGE } from './config';
+import Exercise from './Exercise';
 
 export const state = {
   exercise: '',
@@ -19,14 +19,10 @@ export const loadSearchResults = async function (queryType, query) {
     state.search.queryType = queryType;
     state.search.query = query;
 
-    const response = await AJAX(queryType, query);
+    const data = await Exercise.getExercises(queryType, query);
+    console.log(data);
 
-    if (!response.ok) throw new Error('Request Error');
-
-    const result = await response.json();
-    if (!result) throw new Error('No result');
-
-    state.search.results = result.map(exercise => {
+    state.search.results = data.map(exercise => {
       return {
         id: exercise.id,
         name: exercise.name,
@@ -35,26 +31,22 @@ export const loadSearchResults = async function (queryType, query) {
       };
     });
 
-    state.search.page = 1;
+    // data.length ? (state.search.page = 1) : (state.search.page = 0);
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
 export const loadExercise = async function (id) {
   try {
-    const response = await AJAX('exercise', id);
-    if (!response.ok) throw new Error('Request Error');
-
-    const result = await response.json();
-    if (!result) throw new Error('No result');
+    const data = await Exercise.getExercise(id);
 
     state.exercise = {
-      id: result.id,
-      name: result.name,
-      category: result.bodyPart,
-      instructions: result.instructions,
-      image: result.gifUrl,
+      id: data.id,
+      name: data.name,
+      category: data.bodyPart,
+      instructions: data.instructions,
+      image: data.gifUrl,
     };
 
     // Check if the exercise is added to bookmakrs
@@ -80,11 +72,7 @@ export const generateSchedule = async function (schedule) {
     const newSchedule = [];
     const uniqueIdSet = new Set();
     for await (const element of schedule) {
-      const response = await AJAX('bodyPart', element.category);
-      if (!response.ok) throw new Error('Request error');
-
-      const result = await response.json();
-      if (!result) throw new Error('No result');
+      const result = await Exercise.getExercises('bodyPart', element.category);
 
       for (let i = 0; i < element.exercises; i++) {
         // Leave loop when there is no more exercises in received data
@@ -135,11 +123,10 @@ export const rerollExercise = async function (pickedId) {
       0
     );
 
-    const response = await AJAX('bodyPart', pickedExercise.category);
-    if (!response.ok) throw new Error('Request error');
-
-    const result = await response.json();
-    if (!result) throw new Error('No result');
+    const result = await Exercise.getExercises(
+      'bodyPart',
+      pickedExercise.category
+    );
 
     let id;
     let randomNumber;
