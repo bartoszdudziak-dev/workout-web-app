@@ -19,8 +19,10 @@ export const loadSearchResults = async function (queryType, query) {
     state.search.queryType = queryType;
     state.search.query = query;
 
-    const data = await Exercise.getExercises(queryType, query);
-    console.log(data);
+    const data =
+      state.search.queryType === 'bodyPart'
+        ? await Exercise.getExercisesByCategory(query)
+        : await Exercise.getExercisesByName(query);
 
     state.search.results = data.map(exercise => {
       return {
@@ -31,7 +33,7 @@ export const loadSearchResults = async function (queryType, query) {
       };
     });
 
-    // data.length ? (state.search.page = 1) : (state.search.page = 0);
+    state.search.page = 1;
   } catch (error) {
     throw error;
   }
@@ -72,7 +74,7 @@ export const generateSchedule = async function (schedule) {
     const newSchedule = [];
     const uniqueIdSet = new Set();
     for await (const element of schedule) {
-      const result = await Exercise.getExercises('bodyPart', element.category);
+      const result = await Exercise.getExercisesByCategory(element.category);
 
       for (let i = 0; i < element.exercises; i++) {
         // Leave loop when there is no more exercises in received data
@@ -123,8 +125,7 @@ export const rerollExercise = async function (pickedId) {
       0
     );
 
-    const result = await Exercise.getExercises(
-      'bodyPart',
+    const result = await Exercise.getExercisesByCategory(
       pickedExercise.category
     );
 

@@ -57,7 +57,7 @@ class ShareView {
         console.error('EMAILJS FAILED...', error);
         return;
       }
-      console.error(error);
+      throw error;
     }
   }
 

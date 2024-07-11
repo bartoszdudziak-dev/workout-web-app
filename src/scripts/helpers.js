@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-export const customFetch = function (endpoint, query) {
+export const customFetch = function (url, query) {
   const options = {
     method: 'GET',
     headers: {
@@ -9,8 +9,5 @@ export const customFetch = function (endpoint, query) {
     },
   };
 
-  return fetch(
-    `${process.env.API_URL}${endpoint}/${query}?limit=00&offset=0`,
-    options
-  );
+  return fetch(`${url}${query}?limit=00&offset=0`, options);
 };
