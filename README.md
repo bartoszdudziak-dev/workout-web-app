@@ -1,19 +1,30 @@
-WorkoutApp is a simple frontend project created for people interested in workout.
+![Preview](./static/preview.png)
 
-USER IS ABLE TO:
-- Search for a specific exercise by its name
-- Search for a group of exercises by selected category
-- Check the details of the selected exercise
-- Add and remove specific exercise from bookmarks or from the their workout schedule
-- Generate a random schedule with specific body parts and amount of exercises
-- Share their schedule by email
+# Workout App
 
-I BUILT IT WITH:
-- HTML, SCSS and Vanilla JavaScript
-- Object-Oriented Programming
-- MVC Architectural Pattern
-- Publisher - Subscriber Pattern
-- Parcel Bundler
-- ExerciseDB API (https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb)
+See the live version of [Workout App](https://workout-app-dudziak.netlify.app/).
 
-Check here: https://workout-app-dudziak.netlify.app/
+A lightweight frontend app for browsing workout exercises, developed as a summary project after completing a JavaScript course. Built using the Publisher–Subscriber pattern and the MVP architectural pattern.
+
+**Main features**:
+
+- 🔍 Search & Explore
+- 📝 Exercise Details
+- ⭐ Workout Management
+- 🎲 Schedule Generator
+- 📩 Email Sharing
+- 📱 Responsive Design
+
+&nbsp;
+
+## 💡 Technologies
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+
+&nbsp;
+
+## 👏 Thanks
+
+Thanks to [Jonas Schmedtmann](https://www.udemy.com/user/jonasschmedtmann/) – for providing me knowladge in his [Complete JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/).
